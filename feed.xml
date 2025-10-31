@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Edwin Avalos</title>
+        <link>https://edwinavalos.com</link>
+        <description>Personal blog by Edwin Avalos</description>
+        <language>en-us</language>
+        <atom:link href="https://edwinavalos.com/feed.xml" rel="self" type="application/rss+xml"/>
+        
+    <item>
+        <title>Welcome to My Blog</title>
+        <link>https://edwinavalos.com/2025-10-30-welcome.html</link>
+        <guid>https://edwinavalos.com/2025-10-30-welcome.html</guid>
+        <pubDate>Thu, 30 Oct 2025 00:00:00 +0000</pubDate>
+        <description>Welcome to my personal blog! This is where I'll share my thoughts on technology, programming, and other topics that interest me.</description>
+    </item>
+    </channel>
+</rss>
