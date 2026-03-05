@@ -77,8 +77,8 @@ def generate_rss(posts, output_file='feed.xml'):
         item = f"""
     <item>
         <title>{post['title']}</title>
-        <link>https://edwinavalos.com{post['url']}</link>
-        <guid>https://edwinavalos.com{post['url']}</guid>
+        <link>https://n0tls.com{post['url']}</link>
+        <guid>https://n0tls.com{post['url']}</guid>
         <pubDate>{post['date'].strftime('%a, %d %b %Y %H:%M:%S +0000')}</pubDate>
         <description>{post['excerpt']}</description>
     </item>"""
@@ -88,10 +88,10 @@ def generate_rss(posts, output_file='feed.xml'):
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Edwin Avalos</title>
-        <link>https://edwinavalos.com</link>
+        <link>https://n0tls.com</link>
         <description>Personal blog by Edwin Avalos</description>
         <language>en-us</language>
-        <atom:link href="https://edwinavalos.com/feed.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="https://n0tls.com/feed.xml" rel="self" type="application/rss+xml"/>
         {''.join(rss_items)}
     </channel>
 </rss>"""
