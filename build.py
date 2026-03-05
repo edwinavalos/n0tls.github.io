@@ -4,8 +4,8 @@ Static blog generator for GitHub Pages
 Converts markdown posts to HTML using Jinja2 templates
 """
 
-import os
 import re
+import subprocess
 from datetime import datetime
 from pathlib import Path
 import markdown
@@ -20,6 +20,19 @@ TAG_DIR = OUTPUT_DIR / "tag"
 
 # Ensure tag directory exists
 TAG_DIR.mkdir(exist_ok=True)
+
+
+def get_first_commit_time(filepath):
+    """Return the datetime of the first git commit that added this file.
+    Falls back to mtime for files not yet committed (e.g. during local dev)."""
+    result = subprocess.run(
+        ['git', 'log', '--diff-filter=A', '--format=%ai', '--', str(filepath)],
+        capture_output=True, text=True
+    )
+    date_str = result.stdout.strip()
+    if date_str:
+        return datetime.fromisoformat(date_str)
+    return datetime.fromtimestamp(filepath.stat().st_mtime)
 
 
 def parse_post(filepath):
@@ -60,6 +73,7 @@ def parse_post(filepath):
         'date': date,
         'date_str': date.strftime('%Y-%m-%d'),
         'date_formatted': date.strftime('%B %d, %Y'),
+        'created_at': get_first_commit_time(filepath),
         'tags': tags if isinstance(tags, list) else [tags] if tags else [],
         'excerpt': excerpt,
         'content': html_content,
@@ -125,8 +139,8 @@ def main():
             print(f"✗ Error parsing {post_file}: {e}")
             continue
 
-    # Sort posts by date (newest first)
-    posts.sort(key=lambda p: p['date'], reverse=True)
+    # Sort posts by first commit time (newest first)
+    posts.sort(key=lambda p: p['created_at'], reverse=True)
 
     # Generate individual post pages
     post_template = env.get_template('post.html')
