@@ -63,6 +63,23 @@ def publish(path: Path):
         log.error(f"Failed to publish {path.name}: {e}")
 
 
+def publish_rename(old_path: Path, new_path: Path):
+    log.info(f"Publishing rename {old_path.name} -> {new_path.name}...")
+    try:
+        git("pull", "--rebase", "--autostash", "origin", "main")
+        # git add on a missing file stages its deletion; on the new file stages addition
+        git("add", str(old_path), str(new_path))
+        diff = git("diff", "--cached", "--name-only")
+        if not diff:
+            log.info("No changes staged, skipping commit")
+            return
+        git("commit", "-m", f"Rename post: {old_path.stem} -> {new_path.stem}")
+        git("push", "origin", "main")
+        log.info(f"Published rename: {new_path.name}")
+    except RuntimeError as e:
+        log.error(f"Failed to publish rename: {e}")
+
+
 def swp_for(md_path: Path) -> Path:
     """Return the vim swap file path for a given .md file."""
     return md_path.parent / f".{md_path.name}.swp"
@@ -137,13 +154,24 @@ class PostHandler(FileSystemEventHandler):
     def on_moved(self, event):
         if event.is_directory:
             return
-        path = Path(event.dest_path)
-        if path.suffix != ".md":
+        old_path = Path(event.src_path)
+        new_path = Path(event.dest_path)
+
+        if new_path.suffix != ".md":
             return
-        if swp_for(path).exists():
-            log.info(f"Vim has {path.name} open, waiting for close...")
+
+        if swp_for(new_path).exists():
+            log.info(f"Vim has {new_path.name} open, waiting for close...")
             return
-        self._schedule(path, SETTLE_SECONDS)
+
+        # Rename within posts/ — must stage the deletion of the old name too
+        if old_path.parent == POSTS_DIR and old_path.suffix == ".md":
+            log.info(f"Rename detected: {old_path.name} -> {new_path.name}")
+            t = threading.Timer(VIM_CLOSE_DELAY, publish_rename, args=[old_path, new_path])
+            t.start()
+        else:
+            # File moved in from outside posts/ — treat as new file
+            self._schedule(new_path, SETTLE_SECONDS)
 
 
 if __name__ == "__main__":
