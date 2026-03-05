@@ -87,9 +87,9 @@ def generate_rss(posts, output_file='feed.xml'):
     rss_feed = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Edwin Avalos</title>
+        <title>n0tls</title>
         <link>https://n0tls.com</link>
-        <description>Personal blog by Edwin Avalos</description>
+        <description>Personal blog by n0tls</description>
         <language>en-us</language>
         <atom:link href="https://n0tls.com/feed.xml" rel="self" type="application/rss+xml"/>
         {''.join(rss_items)}
