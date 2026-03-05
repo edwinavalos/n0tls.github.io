@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
-Watches posts/ for new or moved-in markdown files and auto-publishes to GitHub.
+Watches posts/ for markdown file changes and auto-publishes to GitHub.
+
+Vim-aware: waits for the swap file to be deleted (i.e. vim closed the file)
+before publishing. For all other editors, falls back to a 10-second debounce
+on the last write.
+
 Run as a systemd user service.
 """
 
@@ -15,6 +20,11 @@ from watchdog.events import FileSystemEventHandler
 
 REPO_DIR = Path("/home/edwin/repos/n0tls.github.io")
 POSTS_DIR = REPO_DIR / "posts"
+
+# Delay after vim exits before publishing (short, just to let the OS settle)
+VIM_CLOSE_DELAY = 2
+# Delay after last write for non-vim editors
+SETTLE_SECONDS = 10
 
 logging.basicConfig(
     level=logging.INFO,
@@ -37,14 +47,14 @@ def git(*args):
 
 
 def publish(path: Path):
-    log.info(f"New post detected: {path.name}")
+    log.info(f"Publishing {path.name}...")
     try:
-        git("pull", "--rebase", "origin", "main")
+        # --autostash handles any other uncommitted changes in the working tree
+        git("pull", "--rebase", "--autostash", "origin", "main")
         git("add", str(path))
-        # Nothing staged means the file was already committed somehow
         diff = git("diff", "--cached", "--name-only")
         if not diff:
-            log.info(f"No changes staged for {path.name}, skipping commit")
+            log.info(f"No changes in {path.name}, skipping commit")
             return
         git("commit", "-m", f"Add post: {path.stem}")
         git("push", "origin", "main")
@@ -53,7 +63,19 @@ def publish(path: Path):
         log.error(f"Failed to publish {path.name}: {e}")
 
 
-SETTLE_SECONDS = 10
+def swp_for(md_path: Path) -> Path:
+    """Return the vim swap file path for a given .md file."""
+    return md_path.parent / f".{md_path.name}.swp"
+
+
+def md_for_swp(swp_path: Path) -> Path | None:
+    """Derive the .md path from a vim swap file path, or None if not a match."""
+    name = swp_path.name
+    if name.startswith(".") and name.endswith(".swp"):
+        md_name = name[1:-4]  # strip leading '.' and trailing '.swp'
+        if md_name.endswith(".md"):
+            return swp_path.parent / md_name
+    return None
 
 
 class PostHandler(FileSystemEventHandler):
@@ -62,37 +84,66 @@ class PostHandler(FileSystemEventHandler):
         self._timers: dict[Path, threading.Timer] = {}
         self._lock = threading.Lock()
 
-    def _schedule(self, path: Path):
+    def _schedule(self, path: Path, delay: float):
         with self._lock:
             existing = self._timers.pop(path, None)
             if existing:
                 existing.cancel()
-            t = threading.Timer(SETTLE_SECONDS, publish, args=[path])
+            t = threading.Timer(delay, publish, args=[path])
             self._timers[path] = t
             t.start()
-        log.info(f"Waiting {SETTLE_SECONDS}s for {path.name} to settle...")
+        log.info(f"Scheduling {path.name} in {delay:.0f}s...")
+
+    def _cancel(self, path: Path):
+        with self._lock:
+            existing = self._timers.pop(path, None)
+            if existing:
+                existing.cancel()
+
+    def on_deleted(self, event):
+        if event.is_directory:
+            return
+        path = Path(event.src_path)
+        # Swap file deleted = vim exited cleanly
+        md_path = md_for_swp(path)
+        if md_path and md_path.exists():
+            log.info(f"Vim closed {md_path.name}")
+            self._schedule(md_path, VIM_CLOSE_DELAY)
 
     def on_created(self, event):
         if event.is_directory:
             return
         path = Path(event.src_path)
-        if path.suffix == ".md":
-            self._schedule(path)
+        if path.suffix != ".md":
+            return
+        if swp_for(path).exists():
+            # Vim opened this file — wait for swap deletion instead
+            log.info(f"Vim has {path.name} open, waiting for close...")
+            return
+        self._schedule(path, SETTLE_SECONDS)
 
     def on_modified(self, event):
         if event.is_directory:
             return
         path = Path(event.src_path)
-        if path.suffix == ".md":
-            self._schedule(path)
+        if path.suffix != ".md":
+            return
+        if swp_for(path).exists():
+            # Vim is still editing — reset any pending non-vim timer and wait
+            self._cancel(path)
+            return
+        self._schedule(path, SETTLE_SECONDS)
 
     def on_moved(self, event):
-        # Catches files moved/renamed into the posts/ directory
         if event.is_directory:
             return
         path = Path(event.dest_path)
-        if path.suffix == ".md":
-            self._schedule(path)
+        if path.suffix != ".md":
+            return
+        if swp_for(path).exists():
+            log.info(f"Vim has {path.name} open, waiting for close...")
+            return
+        self._schedule(path, SETTLE_SECONDS)
 
 
 if __name__ == "__main__":
