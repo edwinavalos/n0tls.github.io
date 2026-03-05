@@ -7,6 +7,7 @@ Run as a systemd user service.
 import logging
 import subprocess
 import sys
+import threading
 from pathlib import Path
 
 from watchdog.observers import Observer
@@ -52,13 +53,38 @@ def publish(path: Path):
         log.error(f"Failed to publish {path.name}: {e}")
 
 
+SETTLE_SECONDS = 10
+
+
 class PostHandler(FileSystemEventHandler):
+    def __init__(self):
+        super().__init__()
+        self._timers: dict[Path, threading.Timer] = {}
+        self._lock = threading.Lock()
+
+    def _schedule(self, path: Path):
+        with self._lock:
+            existing = self._timers.pop(path, None)
+            if existing:
+                existing.cancel()
+            t = threading.Timer(SETTLE_SECONDS, publish, args=[path])
+            self._timers[path] = t
+            t.start()
+        log.info(f"Waiting {SETTLE_SECONDS}s for {path.name} to settle...")
+
     def on_created(self, event):
         if event.is_directory:
             return
         path = Path(event.src_path)
         if path.suffix == ".md":
-            publish(path)
+            self._schedule(path)
+
+    def on_modified(self, event):
+        if event.is_directory:
+            return
+        path = Path(event.src_path)
+        if path.suffix == ".md":
+            self._schedule(path)
 
     def on_moved(self, event):
         # Catches files moved/renamed into the posts/ directory
@@ -66,7 +92,7 @@ class PostHandler(FileSystemEventHandler):
             return
         path = Path(event.dest_path)
         if path.suffix == ".md":
-            publish(path)
+            self._schedule(path)
 
 
 if __name__ == "__main__":
