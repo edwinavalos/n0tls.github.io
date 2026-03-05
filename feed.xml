@@ -9,10 +9,17 @@
         
     <item>
         <title>Welcome to My Blog</title>
-        <link>https://n0tls.com/2025-10-30-welcome.html</link>
-        <guid>https://n0tls.com/2025-10-30-welcome.html</guid>
-        <pubDate>Thu, 30 Oct 2025 00:00:00 +0000</pubDate>
-        <description>Welcome to my personal blog! This is where I'll share my thoughts on technology, programming, and other topics that interest me.</description>
+        <link>https://n0tls.com/2026-03-05-welcome.html</link>
+        <guid>https://n0tls.com/2026-03-05-welcome.html</guid>
+        <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
+        <description>Welcome to my personal blog! This is where I'm writing AI notes, and probably other rants.</description>
+    </item>
+    <item>
+        <title>Step 0</title>
+        <link>https://n0tls.com/2026-03-05-step-0.html</link>
+        <guid>https://n0tls.com/2026-03-05-step-0.html</guid>
+        <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
+        <description>The first question</description>
     </item>
     </channel>
 </rss>
