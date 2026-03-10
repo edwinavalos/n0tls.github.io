@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Coding Agents Were A Mistake - n0tls</title>
+    <meta name="description" content="Local coding agents introduce to much risk">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed.xml">
+</head>
+<body>
+    <header>
+        <h1><a href="/" style="color: inherit; text-decoration: none;">n0tls</a></h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/feed.xml">RSS</a>
+            <button class="theme-toggle" id="theme-toggle">Toggle Dark Mode</button>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <h1>Local Coding Agents Were A Mistake</h1>
+            <div class="post-meta">
+                <time datetime="2026-03-10">March 10, 2026</time>
+                
+                <div class="tags">
+                    
+                    <a href="/tag/llms.html" class="tag">llms</a>
+                    
+                    <a href="/tag/coding agents.html" class="tag">coding agents</a>
+                    
+                    <a href="/tag/claude.html" class="tag">claude</a>
+                    
+                    <a href="/tag/context.html" class="tag">context</a>
+                    
+                </div>
+                
+            </div>
+            <hr>
+            <h2>Intro</h2>
+<p>I have lived in Claude Code for the better part of 9 months now and have come to love it as a sysadmin and coding tool available to me right in my terminal. I lived in the terminal prior to this as I generally hate using a mouse and having to click around in GUIs to make things work. My experience has been mostly at work and at home in very different contexts.</p>
+<p>This isn't going to be the normal "you should be sandboxing all these tools" types of post, as more of just the general observations I have made as coding agents start to proliferate in corporate environments. Because coding agents can be so powerful in automating many engineering tasks from writing code, to managing deployments and the full lifecycle of an application given enough MCP/CLI/MCP access, the blast radius of these tools is potentially catastrophic. Getting in the way of developers going at Mach 10 is never a popular proposition, so then how do we start moving the mush-iness that is LLM produced code to making the process more rigid and prevent the LLMs from diverging as much as possible from doing the right thing.</p>
+<h2>Doing the right thing</h2>
+<p>My general philosophy to user experience when people are expected to use APIs I contribute is "Make it hard to do the wrong thing, make it seemless to do the right thing". I've worked on projects in the past to standardize the deployment process for various deployment technologies at <a href="https://tech.target.com/blog/targets-cloud-journey">$DAYJOB</a>. When we first started on the journey to creating TAP we did a lot of things in very clunky ways as everything was still coming to existence in and around management or cloud resources.</p>
+<p>Coding Agents feels the same to me. Individual's coding assistant configurations are all over the place. On the same engineering team you might have 7 different ways of configuring your local coding agent sessions than others on your team. In a lot of cases this is probably fine, as long as what you think should absolutely should be shared is somewhere in the files that the coding agent has access to. Individual coding assistants feels like the <em>pets vs cattle</em> phase of cloud deployments back in the day. The industry eventually moved towards immutable infrastructure and the reliability that the paradigm introduced to cloud computing.</p>
+<p>As well intentioned a developer might be, the fact that we can get wildly different results from the same prompts has always bothered me deep down inside. We are engineers, we prefer to have rigid processes and algorithms that solve the problem as deterministically as possible, and with that comes the risk of agents doing the absolutely wrong thing in some percentage of a unit of work they have been tasked to do. LLMs lie, cheat, and will do anything to try and solve your problems. We've all been there, you start to see Claude start writing some intense bash one liners and see a directory you did not expect to be read being read. You mash the esc key as fast as you can to abort. It happens a few times a week for me, but I also believe that I use these tools significantly more than the average user.</p>
+<h2>My observations</h2>
+<ol>
+<li>LLMs will eventually do something dangerous, so do your engineers.</li>
+<li>LLMs increase the speed of seasoned engineers in some aspects, for me in particular is local testing, Claude runs all my local integration testing in managing my local test environments in docker and in libvirt.</li>
+<li>Greenfield is what they are best at, I have pointed coding agents in the summer to existing code bases and they struggled, but since November things have changed dramatically in this aspect, and I think given time these agents will get even better.</li>
+<li>LLMs do best with a very very small unit of work.</li>
+<li>LLMs favor those that can hold large architecture contexts in their brains as well.</li>
+<li>Filling a context window and compacting it kills the effectiveness of agents, subagents with extremely small contexts is my current solution to this</li>
+</ol>
+<h2>Things that have influenced me</h2>
+<p><a href="https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents">Minions</a><br />
+<a href="https://steve-yegge.medium.com/welcome-to-gas-town-4f25ee16dd04">Gas Town</a><br />
+<a href="https://github.com/steveyegge/gastown">Gas Town Repo</a><br />
+<a href="https://github.com/VoltAgent/awesome-claude-code-subagents">awesome-claude-code-subagents</a> -- This was my introduction to subagents in the summer, from this I was able to envision tooling that would break work down into the smallest reliable pieces of work an LLM can do.<br />
+<a href="https://code.claude.com/docs/en/agent-teams">Claude Code Agent Teams</a><br />
+<a href="https://blog.cloudflare.com/code-mode-mcp/">Code Mode: give agents an entire API in 1,000 tokens</a><br />
+<a href="https://www.anthropic.com/engineering/advanced-tool-use">Claude Code Advance Tool Use</a></p>
+<h1>What I think needs to exist</h1>
+<p>Centralized orchestrators have to exist for large engineering organizations. There are very corporate reasons for some of my arguments, but a lot of them will come down to trying to lower the amount of uncertainty and prevent as many LLM mistakes as possible.</p>
+<p>What that looks like in my opinion is something that marries a lot of ideas that I've thrown around but haven't been able to string all the PoCs together but here's the system I envision.</p>
+<ol>
+<li>A coding agent should act as much as like a thin client to a remote system where the agent is actually operating.</li>
+<li>For any given task, an agent should be able to check if there's an approved workflow for running through the current ask (task gateway?)</li>
+<li>Tasks in workflows are so small that they can be evaluated for behavior 1000s of times with 0 or some amount of acceptable failures</li>
+<li>Self-Verification is our white whale, how do people execute or verify the code that an LLM produced, the same tools we use to QA should be available to the LLMs eventually once people are comfortable with them verifying their own work... I know, I know, I'll talk about this some other time.</li>
+<li>Most importantly, context should be heavily manipulated within a workflow to only insert the absolutely necessary context to execute the small task as possible, do not waste context in your system prompt that isn't relevant in running a linter. This is where subagents and atomic operations that can be run in large evaluation runs come in...</li>
+<li>MCP gateways are a must, the agent needs to find the right tool from potentially hundreds/thousands of tools at a large enough company that we need tohave methods of injecting only the needed tools for a workflow task to be completed.</li>
+</ol>
+<p>But Edwin, why can't most of this just be scripts? Most of it should and will eventually be as automated as possible into deterministic code, but what I've found myself doing many times, is working an LLM to 'manually' execute a procedure, and then I ask it to eventually create a script for the process that we just accomplished and with the knowledge of anything it itself found confusing during the testing and execution of the process.</p>
+<p>I have to think this through a little more, but this system partially already exists. Beads, Molecules, Formulas are a start to this paradigm. LLMs need to find and use the right workflow for a given task, and those tasks should be as small as possible.</p>
+<p>Given enough autonomy I think you can eventually get the LLMs to improve their own processes by examining their own session behavior and create common tooling for themselves and their own agent swarms, but that is far off.</p>
+<p>There's more that I need to think about, but wanted to get my ideas down somewhere.</p>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 n0tls. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Dark mode toggle
+        const toggleButton = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        toggleButton.addEventListener('click', () => {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const newTheme = theme === 'light' ? 'dark' : 'light';
+
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+</body>
+</html>
