@@ -6,7 +6,7 @@ tags:
   - coding agents
   - claude
   - context
-excerpt: Local coding agents introduce to much risk
+excerpt: Local coding agents introduce too much risk
 ---
 
 ## Intro
