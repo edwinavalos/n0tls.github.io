@@ -5,6 +5,7 @@ Converts markdown posts to HTML using Jinja2 templates
 """
 
 import re
+import shutil
 import subprocess
 from datetime import datetime
 from pathlib import Path
@@ -15,10 +16,11 @@ import yaml
 # Directories
 POSTS_DIR = Path("posts")
 TEMPLATES_DIR = Path("templates")
-OUTPUT_DIR = Path(".")
+OUTPUT_DIR = Path("site")
 TAG_DIR = OUTPUT_DIR / "tag"
 
-# Ensure tag directory exists
+# Ensure output directories exist
+OUTPUT_DIR.mkdir(exist_ok=True)
 TAG_DIR.mkdir(exist_ok=True)
 
 
@@ -197,6 +199,15 @@ def main():
 
     # Generate RSS feed
     generate_rss(posts)
+
+    # Copy static assets into output directory
+    if Path("css").exists():
+        shutil.copytree("css", OUTPUT_DIR / "css", dirs_exist_ok=True)
+        print("✓ Copied css/")
+
+    if Path("CNAME").exists():
+        shutil.copy("CNAME", OUTPUT_DIR / "CNAME")
+        print("✓ Copied CNAME")
 
     print(f"\n✓ Build complete! Generated {len(posts)} posts, {len(tags_dict)} tag pages, and RSS feed.")
 

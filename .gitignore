@@ -16,7 +16,5 @@ env/
 .DS_Store
 Thumbs.db
 
-# Build artifacts (if using local build instead of GitHub Actions)
-# Uncomment if you want to build locally and commit results
-# *.html
-# feed.xml
+# Build output (committed by CI via git add -f)
+site/

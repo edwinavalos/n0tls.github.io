@@ -39,7 +39,7 @@ jobs:
 
       - name: Commit generated files
         run: |
-          git add -f index.html feed.xml tag/ *.html
+          git add -f site/
           git diff --staged --quiet || git commit -m "Build: Generate static site [skip ci]"
 
       - name: Push changes
@@ -50,6 +50,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./site
           publish_branch: gh-pages
-          exclude_assets: '.github,posts,templates,build.py,.gitignore'
