@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>n0tls</title>
+        <link>https://n0tls.com</link>
+        <description>Personal blog by n0tls</description>
+        <language>en-us</language>
+        <atom:link href="https://n0tls.com/feed.xml" rel="self" type="application/rss+xml"/>
+        
+    <item>
+        <title>Local Coding Agents Were A Mistake</title>
+        <link>https://n0tls.com/2026-03-10-local-coding-agents-were-a-mistake.html</link>
+        <guid>https://n0tls.com/2026-03-10-local-coding-agents-were-a-mistake.html</guid>
+        <pubDate>Tue, 10 Mar 2026 00:00:00 +0000</pubDate>
+        <description>Local coding agents introduce too much risk</description>
+    </item>
+    <item>
+        <title>Welcome to My Blog</title>
+        <link>https://n0tls.com/2026-03-05-welcome.html</link>
+        <guid>https://n0tls.com/2026-03-05-welcome.html</guid>
+        <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
+        <description>Welcome to my personal blog! This is where I'm writing AI notes, and probably other rants.</description>
+    </item>
+    <item>
+        <title>Step 0</title>
+        <link>https://n0tls.com/2026-03-05-step-0.html</link>
+        <guid>https://n0tls.com/2026-03-05-step-0.html</guid>
+        <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
+        <description>The first question</description>
+    </item>
+    <item>
+        <title>personal apps</title>
+        <link>https://n0tls.com/2026-03-05-personal-apps.html</link>
+        <guid>https://n0tls.com/2026-03-05-personal-apps.html</guid>
+        <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
+        <description>squishware of the future</description>
+    </item>
+    </channel>
+</rss>
