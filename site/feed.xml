@@ -8,6 +8,13 @@
         <atom:link href="https://n0tls.com/feed.xml" rel="self" type="application/rss+xml"/>
         
     <item>
+        <title>aud2sg</title>
+        <link>https://n0tls.com/2026-03-18-aud2sg.html</link>
+        <guid>https://n0tls.com/2026-03-18-aud2sg.html</guid>
+        <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
+        <description>Syncing Audible to StoryGraph was tedious. I made an MCP server to fix that.</description>
+    </item>
+    <item>
         <title>Linguistic Musings</title>
         <link>https://n0tls.com/2026-03-14-musings.html</link>
         <guid>https://n0tls.com/2026-03-14-musings.html</guid>
