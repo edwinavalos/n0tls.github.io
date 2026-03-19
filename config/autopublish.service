@@ -1,0 +1,12 @@
+[Unit]
+Description=n0tls blog autopublish watcher
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/edwin/repos/n0tls.github.io/autopublish.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
