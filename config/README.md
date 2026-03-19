@@ -21,10 +21,37 @@ cp config/vimrc ~/.vimrc
 
 ## autopublish.py
 
-The repo root contains `autopublish.py`, a systemd user service that watches
-`posts/` and auto-commits + pushes any new or modified markdown file.
+The repo root contains `autopublish.py`, which watches `posts/` and
+auto-commits + pushes any new or modified markdown file. It detects its own
+location so no path changes are needed.
 
-To install on a new Linux machine:
+### macOS (launchd)
+
+```bash
+# Install dependencies
+pip3 install watchdog
+
+# Install and load the Launch Agent
+cp config/com.n0tls.autopublish.plist ~/Library/LaunchAgents/
+launchctl load ~/Library/LaunchAgents/com.n0tls.autopublish.plist
+```
+
+To check it's running:
+
+```bash
+launchctl list | grep autopublish
+```
+
+Logs go to `/tmp/autopublish.log`.
+
+To stop/restart:
+
+```bash
+launchctl unload ~/Library/LaunchAgents/com.n0tls.autopublish.plist
+launchctl load   ~/Library/LaunchAgents/com.n0tls.autopublish.plist
+```
+
+### Linux (systemd)
 
 ```bash
 # Install dependencies
@@ -35,6 +62,3 @@ cp config/autopublish.service ~/.config/systemd/user/autopublish.service
 systemctl --user daemon-reload
 systemctl --user enable --now autopublish
 ```
-
-> Note: `autopublish.py` hardcodes `REPO_DIR = Path("/home/edwin/repos/n0tls.github.io")`.
-> Update that path if your home directory differs.

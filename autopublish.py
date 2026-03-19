@@ -6,7 +6,7 @@ Vim-aware: waits for the swap file to be deleted (i.e. vim closed the file)
 before publishing. For all other editors, falls back to a 10-second debounce
 on the last write.
 
-Run as a systemd user service.
+Run as a systemd user service (Linux) or launchd Launch Agent (macOS).
 """
 
 import logging
@@ -18,7 +18,7 @@ from pathlib import Path
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-REPO_DIR = Path("/home/edwin/repos/n0tls.github.io")
+REPO_DIR = Path(__file__).resolve().parent
 POSTS_DIR = REPO_DIR / "posts"
 
 # Delay after vim exits before publishing (short, just to let the OS settle)
