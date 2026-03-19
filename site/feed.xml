@@ -8,6 +8,13 @@
         <atom:link href="https://n0tls.com/feed.xml" rel="self" type="application/rss+xml"/>
         
     <item>
+        <title>Linguistic Musings</title>
+        <link>https://n0tls.com/2026-03-14-musings.html</link>
+        <guid>https://n0tls.com/2026-03-14-musings.html</guid>
+        <pubDate>Sat, 14 Mar 2026 00:00:00 +0000</pubDate>
+        <description>Can you recreate brain systems with LLMs?</description>
+    </item>
+    <item>
         <title>Local Coding Agents Were A Mistake</title>
         <link>https://n0tls.com/2026-03-10-local-coding-agents-were-a-mistake.html</link>
         <guid>https://n0tls.com/2026-03-10-local-coding-agents-were-a-mistake.html</guid>

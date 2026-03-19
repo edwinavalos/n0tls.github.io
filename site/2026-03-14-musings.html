@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linguistic Musings - n0tls</title>
+    <meta name="description" content="Can you recreate brain systems with LLMs?">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed.xml">
+</head>
+<body>
+    <header>
+        <h1><a href="/" style="color: inherit; text-decoration: none;">n0tls</a></h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/feed.xml">RSS</a>
+            <button class="theme-toggle" id="theme-toggle">Toggle Dark Mode</button>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <h1>Linguistic Musings</h1>
+            <div class="post-meta">
+                <time datetime="2026-03-14">March 14, 2026</time>
+                
+                <div class="tags">
+                    
+                    <a href="/tag/linguistics.html" class="tag">linguistics</a>
+                    
+                    <a href="/tag/llms.html" class="tag">llms</a>
+                    
+                    <a href="/tag/neuropsych.html" class="tag">neuropsych</a>
+                    
+                </div>
+                
+            </div>
+            <hr>
+            <h1>Everyone on the internet could be a dog</h1>
+<p>I have no idea what I'm talking about, this is all very gut feelings I'm having about the tools I'm working with and what I have learned about the systems in the brain that are in and around how memory works, my understanding the of the brain, my understanding of the mathematics behind the llms, and then what I understand of cellular biology. So I could be completely wrong but I thought I'd put this out into the world and see if anyone bites.</p>
+<h2>Memory MCP servers</h2>
+<p>I remember earlier this summer when coding agents were starting to pick up steam, that there was about a million and half MCP servers to manage long term memory for your LLM. Immediately when I saw the idea, I thought to myself, "Oh yeah duh, you can only hold so much in your <a href="https://en.wikipedia.org/wiki/Working_memory">working memory</a>, you need to offload it to <a href="https://en.wikipedia.org/wiki/Long-term_memory">long term storage</a>, and then be able to access it later". In general some system like that must occur within our own brains, the beauty of the human brain is surprisingly consistent in some aspects of thought, congnition. We get to learn about some of these systems because of things known as <a href="https://en.wikipedia.org/wiki/Aphasia">Asphasias</a>.</p>
+<p><a href="https://en.wikipedia.org/wiki/Aphasia">Aphasias</a> are a impairment of the ability for someone to speak/comprehend/write/sing. Very fascinating stuff, I recommend reading <a href="https://en.wikipedia.org/wiki/Oliver_Sacks">Oliver Sacks</a>' works, <a href="https://en.wikipedia.org/wiki/Musicophilia">Musicophilia</a> is one of my faves. From that research along other diagnosis paird with some kind of speech impairment has unlocked understanding some of the systems and their behaviors. This is where I start to read wikipedia while I'm writing this and remembering how cool the field is.</p>
+<p>But what this comes back down to is that I get the vibes that when things go wrong with LLMs they are exhibiting some behavior that has affected <a href="https://en.wikipedia.org/wiki/Working_memory">working memory</a>, <a href="https://en.wikipedia.org/wiki/Short-term_memory">short term memory</a>, and <a href="https://en.wikipedia.org/wiki/Long-term_memory">long term memory</a>. I know that is silly to think of the mathematics of the LLMs and say that they map to what is happening in the brain, but let's play with that idea.</p>
+<h2>Some fun observations over time</h2>
+<p>When I was first playing around with the ADK from Google I noticed that we weren't able to reference something from earlier in the conversation. It was fun to do some testing in and around that bug. The LLM tackled it quick once it was described, but what really struck me was the way that LLM was either bullshitting me or being very confused about a secret word I had exchanged with it previously. However it has now made me think that a lack of conversation history somewhat maps to <a href="https://en.wikipedia.org/wiki/Anterograde_amnesia">Anterograde amnesia</a>.</p>
+<p>When context compacts, and a summary is made, and the summary is faulty feels a lot like my memory at times.</p>
+<p>When you get to rewind a conversation and go down a different path of logic and thinking feels like my brain mapping out all the possibilities of situations, and partially why I really enjoy rogue likes (I argue Claude Code is the second best video game out there).</p>
+<p>The difference in the quality of responses when you are using the right vocabularly for a problem space feels like <a href="https://en.wikipedia.org/wiki/Priming_(psychology)">Priming</a>, triggering unconcious thoughts for something that's about to happen.</p>
+<p>I know a lot of these observations are heavily tainted by my background in lingustics, but I do think that the key to building something resembling <a href="https://en.wikipedia.org/wiki/Artificial_general_intelligence">AGI</a> will be by mimicing the systems of the brain.</p>
+<h2>My Basic Understanding of LLMs and the Brain</h2>
+<p>I understand that the billions of parameters are basically being run through a whole bunch of matrix multiplication to eventually create a model that provides the most likely next letter as a response is being generated. What this means to most people is that these are just probability machines, not actually something capable of thought.</p>
+<p>From there I think to myself, what is so special about the Human brain if we think it can create novel ideas with the same building blocks of life in comparison to other creations that we might not think exhibit thought?</p>
+<p>If we were to say that the LLMs are modeling the idea that as the brain makes stronger and stronger connections over time that some 'tokens' or nueral connections will become the path of least resistance to generating the next thought/token that a human brain is working through.</p>
+<h2>Conclusion</h2>
+<p>I think you can start to mimic more cognition in LLMs if you use them as a processing component of a bigger system that mimics human cognition. I hope that there is research going down this hairbrained path, but I haven't heard much if anything about it.</p>
+<hr />
+<h2>Further Reading</h2>
+<p><em>Claude reviewed this post and surfaced the following research that is directly relevant to the ideas above.</em></p>
+<p><strong>Cognitive architectures for AI agents</strong><br />
+- <a href="https://arxiv.org/abs/2309.02427">Cognitive Architectures for Language Agents</a> — Sumers, Yao, Narasimhan &amp; Griffiths (2023). Proposes exactly the framework described in the conclusion: LLMs as a component inside a larger, brain-inspired cognitive system.<br />
+- <a href="https://openreview.net/forum?id=BZ5a1r-kVsf">A Path Towards Autonomous Machine Intelligence</a> — Yann LeCun (2022). Argues for a world-model architecture that draws heavily on dual-process (System 1 / System 2) thinking.</p>
+<p><strong>Memory systems</strong><br />
+- <a href="https://stanford.edu/~jlmcc/papers/McCMcNaughtonOReilly95.pdf">Why There Are Complementary Learning Systems in the Hippocampus and Neocortex</a> — McClelland, McNaughton &amp; O'Reilly (1995). The foundational paper on how the brain splits memory labor between fast (hippocampal) and slow (neocortical) systems — the biological basis for the working memory / long-term storage intuition in this post.</p>
+<p><strong>Consciousness and Global Workspace Theory applied to AI</strong><br />
+- <a href="https://arxiv.org/abs/2308.08708">Consciousness in Artificial Intelligence: Insights from the Science of Consciousness</a> — Butlin, Long, Elmoznino, Bengio, Shanahan et al. (2023). Surveys Global Workspace Theory and other neuroscience frameworks as evaluation criteria for AI systems.<br />
+- <a href="https://arxiv.org/abs/2212.03551">Talking About Large Language Models</a> — Murray Shanahan (2023). A careful look at what it means (and doesn't mean) to attribute cognitive properties to LLMs.</p>
+<p><strong>The probabilistic brain</strong><br />
+- <a href="https://pubmed.ncbi.nlm.nih.gov/15541511/">The Bayesian Brain: The Role of Uncertainty in Neural Coding and Computation</a> — Knill &amp; Pouget (2004). If the brain is also a probability machine, "just a probability machine" stops being a dismissal.<br />
+- <a href="https://www.nature.com/articles/nrn2787">The Free-Energy Principle: A Unified Brain Theory?</a> — Karl Friston (2010). Frames the brain as a prediction engine minimizing surprise — a useful lens for thinking about next-token prediction at scale.</p>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 n0tls. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Dark mode toggle
+        const toggleButton = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        toggleButton.addEventListener('click', () => {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const newTheme = theme === 'light' ? 'dark' : 'light';
+
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+</body>
+</html>
