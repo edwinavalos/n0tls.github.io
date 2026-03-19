@@ -9,6 +9,8 @@ on the last write.
 Run as a systemd user service (Linux) or launchd Launch Agent (macOS).
 """
 
+from __future__ import annotations
+
 import logging
 import subprocess
 import sys
