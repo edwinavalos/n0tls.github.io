@@ -15,7 +15,7 @@
             <a href="/">Home</a>
             <a href="/feed.xml">RSS</a>
             <a href="/transcripts.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>Transcripts</a>
-            <button class="theme-toggle" id="theme-toggle">Toggle Dark Mode</button>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
         </nav>
     </header>
 
@@ -53,18 +53,16 @@
     </footer>
 
     <script>
-        // Dark mode toggle
         const toggleButton = document.getElementById('theme-toggle');
         const currentTheme = localStorage.getItem('theme') || 'light';
-
         document.documentElement.setAttribute('data-theme', currentTheme);
-
+        toggleButton.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
         toggleButton.addEventListener('click', () => {
             const theme = document.documentElement.getAttribute('data-theme');
             const newTheme = theme === 'light' ? 'dark' : 'light';
-
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
+            toggleButton.textContent = newTheme === 'dark' ? '☀️' : '🌙';
         });
     </script>
 </body>
