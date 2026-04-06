@@ -209,6 +209,21 @@ def main():
         shutil.copy("CNAME", OUTPUT_DIR / "CNAME")
         print("✓ Copied CNAME")
 
+    if Path("images").exists():
+        shutil.copytree("images", OUTPUT_DIR / "images", dirs_exist_ok=True)
+        print("✓ Copied images/")
+
+    if Path("transcripts").exists():
+        shutil.copytree("transcripts", OUTPUT_DIR / "transcripts", dirs_exist_ok=True)
+        print("✓ Copied transcripts/")
+
+    # Generate transcripts listing page
+    transcripts_template = env.get_template("transcripts.html")
+    transcripts_html = transcripts_template.render(year=datetime.now().year)
+    with open(OUTPUT_DIR / "transcripts.html", "w", encoding="utf-8") as f:
+        f.write(transcripts_html)
+    print("✓ Generated: transcripts.html")
+
     print(f"\n✓ Build complete! Generated {len(posts)} posts, {len(tags_dict)} tag pages, and RSS feed.")
 
 

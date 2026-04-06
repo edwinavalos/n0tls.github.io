@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>n0tls - Blog</title>
-    <meta name="description" content="Personal blog by n0tls">
+    <title>n0tls - Transcripts</title>
+    <meta name="description" content="Claude Code session transcripts showing how small tools get built">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed.xml">
 </head>
@@ -17,37 +17,30 @@
             <a href="/feed.xml"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19.01 7.38 20 6.18 20 4.98 20 4 19.01 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/></svg>RSS</a>
             <a href="https://github.com/edwinavalos" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>edwinavalos</a>
             <a href="https://github.com/orgs/amos-labs-cloud/repositories" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>amos-labs-cloud</a>
-            <a href="/transcripts.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>Transcripts</a>
+            <a href="/transcripts.html" aria-current="page"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>Transcripts</a>
             <button class="theme-toggle" id="theme-toggle">Toggle Dark Mode</button>
         </nav>
     </header>
 
     <main>
-        <h2>Recent Posts</h2>
-        {% if posts %}
+        <h2>Claude Code Transcripts</h2>
+        <p style="color: var(--text-muted, #666); margin-bottom: 2rem;">Session transcripts showing how I use coding agents to build small tools rapidly. Sensitive deployment details are redacted.</p>
+
+        <h3>voice-evals <small style="font-weight: normal; font-size: 0.85em; color: var(--text-muted, #666);">— <a href="https://experiments.n0tls.com/voice-evals/" target="_blank" rel="noopener">experiments.n0tls.com/voice-evals/</a></small></h3>
         <ul class="post-list">
-            {% for post in posts %}
             <li class="post-item">
-                <div class="post-meta">
-                    <time datetime="{{ post.date }}">{{ post.date_formatted }}</time>
-                </div>
-                <h3 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
-                {% if post.excerpt %}
-                <p class="post-excerpt">{{ post.excerpt }}</p>
-                {% endif %}
-                {% if post.tags %}
-                <div class="tags">
-                    {% for tag in post.tags %}
-                    <a href="/tag/{{ tag }}.html" class="tag">{{ tag }}</a>
-                    {% endfor %}
-                </div>
-                {% endif %}
+                <div class="post-meta"><time>2026-04-05</time></div>
+                <h3 class="post-title"><a href="/transcripts/voice-evals-ideation.html">Ideation — scoping the project from scratch</a></h3>
+                <p class="post-excerpt">The moment in a longer reader.n0tls.com session where I pivoted to planning the voice-evals tool. Prior notes weren't written down so we rebuilt the scope in conversation, ending with a CLAUDE.md handed off to a new agent.</p>
+                <div class="tags"><span class="tag">3 prompts</span></div>
             </li>
-            {% endfor %}
+            <li class="post-item">
+                <div class="post-meta"><time>2026-04-05</time></div>
+                <h3 class="post-title"><a href="/transcripts/voice-evals-implementation.html">Implementation — building the whole tool in one session</a></h3>
+                <p class="post-excerpt">A new Claude session read the CLAUDE.md and built the FastAPI backend, frontend UI, deployment scripts, model downloads, rating system, comparison matrix, public-release hardening (rate limiting, word cap, stateless storage), and HTTPS setup.</p>
+                <div class="tags"><span class="tag">34 prompts</span></div>
+            </li>
         </ul>
-        {% else %}
-        <p>No posts yet. Create your first post in the <code>posts/</code> directory.</p>
-        {% endif %}
     </main>
 
     <footer>
@@ -55,16 +48,12 @@
     </footer>
 
     <script>
-        // Dark mode toggle
         const toggleButton = document.getElementById('theme-toggle');
         const currentTheme = localStorage.getItem('theme') || 'light';
-
         document.documentElement.setAttribute('data-theme', currentTheme);
-
         toggleButton.addEventListener('click', () => {
             const theme = document.documentElement.getAttribute('data-theme');
             const newTheme = theme === 'light' ? 'dark' : 'light';
-
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
         });
