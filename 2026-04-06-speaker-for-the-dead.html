@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What are we really? - n0tls</title>
+    <meta name="description" content="Speaker for the Dead left me thinking">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed.xml">
+</head>
+<body>
+    <header>
+        <h1><a href="/" style="color: inherit; text-decoration: none;">n0tls</a></h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/feed.xml">RSS</a>
+            <button class="theme-toggle" id="theme-toggle">Toggle Dark Mode</button>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <h1>What are we really?</h1>
+            <div class="post-meta">
+                <time datetime="2026-04-06">April 06, 2026</time>
+                
+                <div class="tags">
+                    
+                    <a href="/tag/books.html" class="tag">books</a>
+                    
+                    <a href="/tag/review.html" class="tag">review</a>
+                    
+                </div>
+                
+            </div>
+            <hr>
+            <p>I just finished listening to Speaker for the Dead once again, it had been a very long time since I had read the mainline of Ender's Game books. Ender's Game, I imagine to a lot of sci-fi nerds in their youth resonated with, as did I. The ending hit me so hard as a kid and left a lasting impression and paranoia but that's a story for my therapist.</p>
+<p>I did not like the book at all until probably the last 15% of the book (I only listen to books nowadays...) where everything starts to pay off. I felt like I was reading one of the telenovelas I watched with my family around the TV. And so when it started getting good, I was upset it ended, but that's books for you. Ultimately one of the questions left unanswered at the end of the book was what part of our consciousness, physicality, experiences makes up a person. It was wild, you had to be there.</p>
+<p>Warning, this is now a hard tangent:</p>
+<p>I have been working on <a href="https://reader.n0tls.com">reader</a> over the last few days</p>
+<p><img alt="reader app screenshot" src="/images/reader-screencap.png" /> while I'm on vacation and it's been a joy to use it a platform to learn a few more things about TTS models out there in the wild. It has also led me to opening up a little public <a href="https://experiments.n0tls.com">experiment</a> page where I'll be posting tools I make to help me make product decisions while I work on this.</p>
+<p>I will eventually be open sourcing the code so people can run it themselves if they want, I've been running it on a small Hetzner instance.</p>
+<p>But that reason for the tangent is that <a href="https://deadneurons.substack.com/p/why-the-most-valuable-things-you">this article</a> was one of the links I submitted to my service throughout my errands day, when I would read a headline and tell myself, well I do actually want to know what it says beyond the headline. I'm able to async listen to the story.</p>
+<p>From that the idea of what actually matters is experience and that is what holds value at least in our society, but there's definitely more to that though. Ultimately I think both the book and that article really are distilling what does it mean to be a being. What is that essence that makes us living, thinking, reasoning 'machines'. Afterall, our thought is an emergent behavior of whatever our braincells are up to (what a fascinating organ).</p>
+<p>I recommend reading both, probably start with the article first as it is much more digestible.</p>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 n0tls. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Dark mode toggle
+        const toggleButton = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        toggleButton.addEventListener('click', () => {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const newTheme = theme === 'light' ? 'dark' : 'light';
+
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+</body>
+</html>
