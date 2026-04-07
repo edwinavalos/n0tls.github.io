@@ -7,7 +7,7 @@ Converts markdown posts to HTML using Jinja2 templates
 import re
 import shutil
 import subprocess
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 import markdown
 from jinja2 import Environment, FileSystemLoader
@@ -34,7 +34,7 @@ def get_first_commit_time(filepath):
     date_str = result.stdout.strip()
     if date_str:
         return datetime.fromisoformat(date_str)
-    return datetime.fromtimestamp(filepath.stat().st_mtime)
+    return datetime.fromtimestamp(filepath.stat().st_mtime, tz=timezone.utc)
 
 
 def parse_post(filepath):
