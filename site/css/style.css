@@ -211,6 +211,14 @@ footer {
     padding: 1rem;
   }
 
+  header nav {
+    gap: 1rem;
+  }
+
+  header nav .nav-label {
+    display: none;
+  }
+
   h1 { font-size: 2rem; }
   h2 { font-size: 1.75rem; }
   h3 { font-size: 1.25rem; }
