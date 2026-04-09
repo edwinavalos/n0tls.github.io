@@ -8,6 +8,13 @@
         <atom:link href="https://n0tls.com/feed.xml" rel="self" type="application/rss+xml"/>
         
     <item>
+        <title>Project Glasswing</title>
+        <link>https://n0tls.com/2026-04-08-project-glasswing.html</link>
+        <guid>https://n0tls.com/2026-04-08-project-glasswing.html</guid>
+        <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
+        <description>What's the endgame?</description>
+    </item>
+    <item>
         <title>experiments.n0tls.com</title>
         <link>https://n0tls.com/2026-04-07-experiments.html</link>
         <guid>https://n0tls.com/2026-04-07-experiments.html</guid>
@@ -69,13 +76,6 @@
         <guid>https://n0tls.com/2026-03-05-step-0.html</guid>
         <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
         <description>The first question</description>
-    </item>
-    <item>
-        <title>personal apps</title>
-        <link>https://n0tls.com/2026-03-05-personal-apps.html</link>
-        <guid>https://n0tls.com/2026-03-05-personal-apps.html</guid>
-        <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
-        <description>squishware of the future</description>
     </item>
     </channel>
 </rss>
