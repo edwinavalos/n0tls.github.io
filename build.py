@@ -53,6 +53,12 @@ def parse_post(filepath):
     # Convert markdown to HTML
     md = markdown.Markdown(extensions=['fenced_code', 'codehilite', 'tables', 'nl2br'])
     html_content = md.convert(markdown_content)
+    # Render mermaid fenced blocks as <pre class="mermaid"> instead of <code>
+    html_content = re.sub(
+        r'<code class="language-mermaid">(.*?)</code>',
+        lambda m: f'<pre class="mermaid">{m.group(1)}</pre>',
+        html_content, flags=re.DOTALL
+    )
 
     # Extract metadata
     title = front_matter.get('title', 'Untitled')
@@ -154,6 +160,7 @@ def main():
             tags=post['tags'],
             excerpt=post['excerpt'],
             content=post['content'],
+            use_mermaid='class="mermaid"' in post['content'],
             year=datetime.now().year
         )
 
