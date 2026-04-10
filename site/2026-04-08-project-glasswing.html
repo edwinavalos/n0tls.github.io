@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://analytics.n0tls.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://analytics.n0tls.com; frame-src 'none'; object-src 'none'; base-uri 'self'">
     <title>Project Glasswing - n0tls</title>
-    <meta name="description" content="What's the endgame?">
+    <meta name="description" content="What&#39;s the endgame?">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed.xml">
@@ -82,8 +83,9 @@ All my sysadmin knowledge across soooo many years</p>
     </footer>
 
     
+    <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/mermaid@11.14.0/dist/mermaid.esm.min.mjs" integrity="sha384-QKnqrMjp4QCSqR5R2H+rXW8780iTNp7Y3mwQOMdlAZhMePrlb/UxZJYF+Mqf+kUw" crossorigin="anonymous">
     <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.14.0/dist/mermaid.esm.min.mjs';
         const isDark = localStorage.getItem('theme') === 'dark';
         mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
     </script>

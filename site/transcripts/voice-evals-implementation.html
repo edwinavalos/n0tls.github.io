@@ -490,7 +490,7 @@ document.querySelectorAll('time[data-timestamp]').forEach(function(el) {
     else { el.textContent = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + ' ' + timeStr; }
 });
 document.querySelectorAll('pre.json').forEach(function(el) {
-    let text = el.textContent;
+    let text = el.textContent.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     text = text.replace(/"([^"]+)":/g, '<span style="color: #ce93d8">"$1"</span>:');
     text = text.replace(/: "([^"]*)"/g, ': <span style="color: #81d4fa">"$1"</span>');
     text = text.replace(/: (\d+)/g, ': <span style="color: #ffcc80">$1</span>');
