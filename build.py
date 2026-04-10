@@ -7,6 +7,7 @@ Converts markdown posts to HTML using Jinja2 templates
 import re
 import shutil
 import subprocess
+import xml.sax.saxutils as saxutils
 from datetime import datetime, timezone
 from pathlib import Path
 import markdown
@@ -98,11 +99,11 @@ def generate_rss(posts, output_file='feed.xml'):
     for post in posts[:10]:  # Latest 10 posts
         item = f"""
     <item>
-        <title>{post['title']}</title>
+        <title>{saxutils.escape(post['title'])}</title>
         <link>https://n0tls.com{post['url']}</link>
         <guid>https://n0tls.com{post['url']}</guid>
         <pubDate>{post['date'].strftime('%a, %d %b %Y %H:%M:%S +0000')}</pubDate>
-        <description>{post['excerpt']}</description>
+        <description>{saxutils.escape(post['excerpt'])}</description>
     </item>"""
         rss_items.append(item)
 
