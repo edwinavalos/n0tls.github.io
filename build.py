@@ -128,7 +128,7 @@ def generate_rss(posts, output_file='feed.xml'):
 def main():
     """Main build process"""
     # Setup Jinja2
-    env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)))
+    env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)), autoescape=True)
 
     # Get all markdown files
     post_files = sorted(POSTS_DIR.glob("*.md"), reverse=True)
