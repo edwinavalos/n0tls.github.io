@@ -44,8 +44,9 @@
     </footer>
 
     {% if use_mermaid %}
+    <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/mermaid@11.14.0/dist/mermaid.esm.min.mjs" integrity="sha384-QKnqrMjp4QCSqR5R2H+rXW8780iTNp7Y3mwQOMdlAZhMePrlb/UxZJYF+Mqf+kUw" crossorigin="anonymous">
     <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.14.0/dist/mermaid.esm.min.mjs';
         const isDark = localStorage.getItem('theme') === 'dark';
         mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
     </script>
