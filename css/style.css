@@ -178,6 +178,7 @@ hr {
 
 /* Dark mode toggle */
 .theme-toggle {
+  margin-left: auto;
   background: none;
   border: 1px solid var(--border);
   color: var(--text);
