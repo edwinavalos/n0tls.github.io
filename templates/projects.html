@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://analytics.n0tls.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://analytics.n0tls.com; frame-src 'none'; object-src 'none'; base-uri 'self'">
-    <title>Tag: benchmarks - n0tls</title>
-    <meta name="description" content="Posts tagged with benchmarks">
+    <title>n0tls - Projects</title>
+    <meta name="description" content="Things I have deployed in the world">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed.xml">
@@ -20,58 +20,49 @@
             <div class="nav-stack">
                 <a href="https://experiments.n0tls.com" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M9 3v8.5L4.5 19A2 2 0 0 0 6.34 22h11.32a2 2 0 0 0 1.84-2.76L15 11.5V3H9zm2 0h2v2h-2V3zm0 3h2v2h-2V6zm-3.06 9.5H16.06l1.5 3H4.44l1.5-3z"/></svg><span class="nav-label">Experiments</span></a>
                 <a href="/transcripts.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg><span class="nav-label">Transcripts</span></a>
-                <a href="/projects.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm13 0h-3v3h3v3h3v-3h3v-3h-3v-3h-3z"/></svg><span class="nav-label">Projects</span></a>
+                <a href="/projects.html" aria-current="page"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm13 0h-3v3h3v3h3v-3h3v-3h-3v-3h-3z"/></svg><span class="nav-label">Projects</span></a>
             </div>
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
         </nav>
     </header>
 
     <main>
-        <h2>Posts tagged with "benchmarks"</h2>
+        <h2>Projects</h2>
+        <p style="color: var(--text-muted, #666); margin-bottom: 2rem;">Things I have deployed in the world.</p>
+
         <ul class="post-list">
-            
             <li class="post-item">
-                <div class="post-meta">
-                    <time datetime="2026-03-19">March 19, 2026</time>
-                </div>
-                <h3 class="post-title"><a href="/2026-03-19-more-musings.html">Claude as a Research Partner</a></h3>
-                
-                <p class="post-excerpt">How much of my linguistics degree do I really remember?</p>
-                
-                
-                <div class="tags">
-                    
-                    <a href="/tag/linguistics.html" class="tag">linguistics</a>
-                    
-                    <a href="/tag/llms.html" class="tag">llms</a>
-                    
-                    <a href="/tag/benchmarks.html" class="tag">benchmarks</a>
-                    
-                    <a href="/tag/cognitive science.html" class="tag">cognitive science</a>
-                    
-                </div>
-                
+                <h3 class="post-title"><a href="https://reader.n0tls.com" target="_blank" rel="noopener">reader.n0tls.com</a></h3>
+                <p class="post-excerpt">An RSS reader built to my tastes. Pulls feeds, stores articles, and serves a clean reading interface.</p>
             </li>
-            
+            <li class="post-item">
+                <h3 class="post-title"><a href="https://experiments.n0tls.com" target="_blank" rel="noopener">experiments.n0tls.com</a></h3>
+                <p class="post-excerpt">Small tools and experiments built in short sessions. Each one ships to a public URL.</p>
+            </li>
+            <li class="post-item">
+                <h3 class="post-title"><a href="https://github.com/edwinavalos" target="_blank" rel="noopener">github.com/edwinavalos</a></h3>
+                <p class="post-excerpt">Personal GitHub — public repos and open source work.</p>
+            </li>
+            <li class="post-item">
+                <h3 class="post-title"><a href="https://github.com/orgs/amos-labs-cloud/repositories" target="_blank" rel="noopener">github.com/amos-labs-cloud</a></h3>
+                <p class="post-excerpt">Amos Labs — the org where longer-running projects live.</p>
+            </li>
         </ul>
-        <p><a href="/">← Back to all posts</a></p>
     </main>
 
     <footer>
-        <p>&copy; 2026 n0tls. All rights reserved.</p>
+        <p>&copy; {{ year }} n0tls. All rights reserved.</p>
     </footer>
 
     <script>
         const toggleButton = document.getElementById('theme-toggle');
         const currentTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', currentTheme);
-        toggleButton.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
         toggleButton.addEventListener('click', () => {
             const theme = document.documentElement.getAttribute('data-theme');
             const newTheme = theme === 'light' ? 'dark' : 'light';
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-            toggleButton.textContent = newTheme === 'dark' ? '☀️' : '🌙';
         });
     </script>
 </body>

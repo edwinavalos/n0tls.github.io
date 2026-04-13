@@ -232,6 +232,13 @@ def main():
         f.write(transcripts_html)
     print("✓ Generated: transcripts.html")
 
+    # Generate projects page
+    projects_template = env.get_template("projects.html")
+    projects_html = projects_template.render(year=datetime.now().year)
+    with open(OUTPUT_DIR / "projects.html", "w", encoding="utf-8") as f:
+        f.write(projects_html)
+    print("✓ Generated: projects.html")
+
     print(f"\n✓ Build complete! Generated {len(posts)} posts, {len(tags_dict)} tag pages, and RSS feed.")
 
 

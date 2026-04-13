@@ -55,7 +55,7 @@ header nav {
   align-items: center;
 }
 
-.nav-github-stack {
+.nav-stack {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;

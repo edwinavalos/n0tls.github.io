@@ -29,18 +29,18 @@
         <description>A new home for small tools and projects — starting with voice model evals.</description>
     </item>
     <item>
-        <title>What are we really?</title>
-        <link>https://n0tls.com/2026-04-06-speaker-for-the-dead.html</link>
-        <guid>https://n0tls.com/2026-04-06-speaker-for-the-dead.html</guid>
-        <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
-        <description>Speaker for the Dead left me thinking</description>
-    </item>
-    <item>
         <title>Hippo Memory</title>
         <link>https://n0tls.com/2026-04-06-hippo-memory.html</link>
         <guid>https://n0tls.com/2026-04-06-hippo-memory.html</guid>
         <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
         <description>Found a repo that starts to touch on the memory ideas I've been circling around in previous posts.</description>
+    </item>
+    <item>
+        <title>What are we really?</title>
+        <link>https://n0tls.com/2026-04-06-speaker-for-the-dead.html</link>
+        <guid>https://n0tls.com/2026-04-06-speaker-for-the-dead.html</guid>
+        <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+        <description>Speaker for the Dead left me thinking</description>
     </item>
     <item>
         <title>Claude as a Research Partner</title>
@@ -71,11 +71,11 @@
         <description>Local coding agents introduce too much risk</description>
     </item>
     <item>
-        <title>Welcome to My Blog</title>
-        <link>https://n0tls.com/2026-03-05-welcome.html</link>
-        <guid>https://n0tls.com/2026-03-05-welcome.html</guid>
+        <title>personal apps</title>
+        <link>https://n0tls.com/2026-03-05-personal-apps.html</link>
+        <guid>https://n0tls.com/2026-03-05-personal-apps.html</guid>
         <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
-        <description>Welcome to my personal blog! This is where I'm writing AI notes, and probably other rants.</description>
+        <description>squishware of the future</description>
     </item>
     </channel>
 </rss>
