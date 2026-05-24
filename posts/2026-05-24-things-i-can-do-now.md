@@ -26,6 +26,5 @@ Things that I have enjoyed automating:
 In general I very rarely have to interact with an IDE anymore, I keep Goland open to copy in a scratch file for some formatting most of the time, but the vim mode in Claude Code mostly replaces that. Claude is the main interface to 95% of my computing, its nice to live in the terminal like this. I've only really caught myself running linux commands manually a few times in the last year, mostly when typing the English for what I want to do is slower than just doing `ls -al | grep word`.
 
 I don't know why I wrote this other than to just get my ideas going again, but always curious to see what people are automating.
--
 
 
