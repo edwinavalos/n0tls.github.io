@@ -52,7 +52,7 @@
                 
             </div>
             <hr>
-            <p>I wanted to jot down some things I have learned while building out <a href="https://github.com/edwinavalos/rubbish">rubbish</a>.</p>
+            <p>I wanted to jot down some things I have learned while building out <a href="https://github.com/edwinavalos/rubbish">rubbish</a>, a project built on <a href="https://github.com/firecracker-microvm/firecracker">firecracker</a> vms running agents in a VM sandbox.</p>
 <ul>
 <li><em>Durable execution</em> -- I resisted introducing a proper workflow engine into the project to learn the rough edges of having to write your own agent scheduler and executor. It was very fragile and was breaking easily. Using a project like <a href="https://temporal.io">Temporal</a> now makes sense to me.</li>
 <li><em>Putting agents in non-standard envs</em> -- When an agent starts in a highly restricted workspace and is not knowledgeable about the setup it is going to really struggle with how to run things, especially if it needs any kind of dockerization or virtualization that won't be directly available</li>
