@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://analytics.n0tls.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://analytics.n0tls.com; frame-src 'none'; object-src 'none'; base-uri 'self'">
-    <title>Tag: claude - n0tls</title>
-    <meta name="description" content="Posts tagged with claude">
+    <title>How I learned and started hating the term RAG - n0tls</title>
+    <meta name="description" content="A control environment, five eval runs, and a lot of bugs on the way to figuring out why a RAG pipeline can&#39;t find the first document.">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed.xml">
@@ -31,17 +31,10 @@
     </header>
 
     <main>
-        <h2>Posts tagged with "claude"</h2>
-        <ul class="post-list">
-            
-            <li class="post-item">
-                <div class="post-meta">
-                    <time datetime="2026-09-03">September 03, 2026</time>
-                </div>
-                <h3 class="post-title"><a href="/2026-09-03-i-think-i-reinvented-rag-with-grep.html">How I learned and started hating the term RAG</a></h3>
-                
-                <p class="post-excerpt">A control environment, five eval runs, and a lot of bugs on the way to figuring out why a RAG pipeline can&#39;t find the first document.</p>
-                
+        <article>
+            <h1>How I learned and started hating the term RAG</h1>
+            <div class="post-meta">
+                <time datetime="2026-09-03">September 03, 2026</time>
                 
                 <div class="tags">
                     
@@ -57,60 +50,96 @@
                     
                 </div>
                 
-            </li>
-            
-            <li class="post-item">
-                <div class="post-meta">
-                    <time datetime="2026-05-24">May 24, 2026</time>
-                </div>
-                <h3 class="post-title"><a href="/2026-05-24-things-i-can-do-now.html">Things I can automate now</a></h3>
-                
-                <p class="post-excerpt">The things that have become easier</p>
-                
-                
-                <div class="tags">
-                    
-                    <a href="/tag/automation.html" class="tag">automation</a>
-                    
-                    <a href="/tag/llms.html" class="tag">llms</a>
-                    
-                    <a href="/tag/claude.html" class="tag">claude</a>
-                    
-                </div>
-                
-            </li>
-            
-            <li class="post-item">
-                <div class="post-meta">
-                    <time datetime="2026-03-10">March 10, 2026</time>
-                </div>
-                <h3 class="post-title"><a href="/2026-03-10-local-coding-agents-were-a-mistake.html">Local Coding Agents Were A Mistake</a></h3>
-                
-                <p class="post-excerpt">Local coding agents introduce too much risk</p>
-                
-                
-                <div class="tags">
-                    
-                    <a href="/tag/llms.html" class="tag">llms</a>
-                    
-                    <a href="/tag/coding agents.html" class="tag">coding agents</a>
-                    
-                    <a href="/tag/claude.html" class="tag">claude</a>
-                    
-                    <a href="/tag/context.html" class="tag">context</a>
-                    
-                </div>
-                
-            </li>
-            
-        </ul>
-        <p><a href="/">← Back to all posts</a></p>
+            </div>
+            <hr>
+            <p>I've been working with a RAG service that had abysmal first-document retrieval out of the box, and I wanted to dig further by using a very generic example to see what I could come up with blind, not knowing the domain of the documents I was trying to retrieve. Instead of guessing at knobs to turn, I wanted to run experiments one by one to see what changing a certain technique would cause. I wanted to do this without fetching encodings from a RAG service directly and see what we could do with better plaintext indices and maybe better prompts. The better prompting was something that I was very apprehensive about. I hate solving LLM patterns with prompts and was hoping to see how much the different instructions helped. </p>
+<h2>The control environment</h2>
+<p>Picked <a href="https://github.com/denoland/docs">denoland/docs</a> as the target which has 457 markdown files in a public github repo. Nothing I own so no bias in how it's structured. Then two subagents were used to keep their contexts separate.</p>
+<ol>
+<li>One roleplays a spread of Deno users (Node migrant, beginner, someone debugging permissions, someone pasting an error) and writes 45 queries. Importantly, <em>without</em> reading the corpus, so that questions do not get affected by any information that could be found in the documentation.</li>
+<li>A second agent explores the corpus and links each query to its ground-truth answer doc, or marks it <code>coverage: none</code> if nothing in the corpus actually answers it.</li>
+</ol>
+<p>I ended up with 38 direct hits, 2 partial, and 5 unanswerable queries in the ground truth. I ended up using gpt-5.1-nano for this as I am of the opinion that making something the best it can be with the worst tools available will make it much easier to adopt the better tools and get even better results, and it saves some money.</p>
+<h2>Round 1: the graph loop I originally imagined</h2>
+<p>My first instinct (and the thing I actually came in wanting to build) was a graph-based agent on <a href="https://github.com/google/adk-go">google/adk-go</a> — <code>search → judge → loop back or finalize</code>, bounded at 4 rounds.</p>
+<p>Baseline: <strong>51.1% exact hits, 62.2% acceptable, ~22s/query.</strong></p>
+<h2>Round 2: reading a reference architecture instead of guessing</h2>
+<p>Before iterating further I went and read a reference architecture of an exploration tool. It differs that it has no judge, no loop at all. One agent turn, instructed to fire tool calls in parallel and search thoroughly before committing, then report once. So I built a second method to test with the same eval set, same tools, no looping to compare it against the original graph idea I had.</p>
+<p><strong>55.6% exact, 62.2% acceptable, ~6s/query.</strong> Faster by 4x and slightly more accurate. The loop wasn't earning its cost on this corpus; sometimes it recovered a wrong first guess, more often it just spent extra rounds converging on the same answer or a worse one.</p>
+<h2>Round 3: matching the actual toolset</h2>
+<p>Kept digging into that same reference architecture's tools instead of assuming. Its glob tool does real <code>**</code> glob matching. We swapped in <a href="https://github.com/bmatcuk/doublestar">doublestar</a>. Its grep tool supports ripgrep-style <code>-A/-B/-C</code> context lines and added that too. It <strong>made things worse</strong> (51.1% / 57.8%), which was a useful negative result: more context per grep call meant fewer, more "satisfied" parallel calls, trading search breadth for depth it didn't need. I then ported a ranking heuristic that is used to find the right tool among hundreds of deferred ones. It seemed like a similar shape of a problem as finding the right doc among hundreds of files into a <code>rank_docs</code> tool that scores every doc by weighted term overlap (path &gt; title &gt; body) and returns a ranked shortlist instead of an unordered grep dump. A note for future self is to do a cost comparison between marginal improvements.</p>
+<p><strong>55.6% exact, 66.7% acceptable</strong> a new best, and it recovered the context-lines regression.</p>
+<h2>Round 4: the big one</h2>
+<p>During these experiments the agent would confidently name a wrong document for queries the corpus doesn't cover, instead of recusing itself. I wanted to try a few more ideas tested together that weren't necessarily aiming at solving that problem, but I wanted to see how useful it was.</p>
+<ol>
+<li><strong>A corpus catalog</strong>. Built out-of-band (a separate one-time command, not inside the eval loop), the LLM summarizes every doc in the corpus into single-sentence summaries and some small metadata, batched, then the whole 457-entry catalog gets inlined directly into the agent's system prompt. The idea: the model was deciding "nothing covers this" from an <em>incomplete</em> search. Let it see the whole corpus's shape at once instead.</li>
+<li><strong>A calibration instruction</strong>. Require the model to quote the actual passage supporting its answer, and tell it explicitly that "not covered" is a common, correct, expected outcome, not a failure to avoid. I hate having to resort to a prompt here, but it did help.</li>
+</ol>
+<p><strong>57.8% exact, 73.3% acceptable</strong> — biggest single jump of the night, and one of the five original unanswerable queries flipped from confidently-wrong to correctly-abstaining for the first time all evening.</p>
+<h2>Then I went down a rabbit hole</h2>
+<p>Towards the end of the experiment I started asking why any of this beats the RAG service that gave me those bad experiences in the first place, and ended up talking myself in a circle about it.</p>
+<p>Here are the things that stuck out to me:</p>
+<p><strong>What we built has no vectors in it.</strong> No embedding, vector, or similarity search. The catalog is inlined text the model reads directly, no retrieval step at all. That works because the corpus is small enough to fit in context (457 docs, ~15K tokens for the whole catalog). This solution does not scale. The moment the corpus doesn't fit reasonably into context, you start to incur significant token increase. This is the reason vector retrieval exists: embeddings aren't much better, they're just the best we have for solving these types of problems at the moment at scale.</p>
+<p>Also finally got why "RAG" as a label bugs me: it names a paradigm ("retrieve then generate"), and people use it as if it names a technique. Under that one umbrella you'll find naive top-k cosine similarity, hybrid search with reranking, GraphRAG, RAPTOR (hierarchical LLM-summarized trees, our single flat file being related to this), agentic search, and long-context stuffing. These all get called "RAG" depending on who you talk to despite being different mechanisms with different quality ceilings. When a vendor says "we have RAG," it tells you nothing about how they are doing things, you will need to dig in deeper to see if they are doing something novel.</p>
+<p>Ended the night generating myself <a href="https://claude.ai/code/artifact/13f6d86e-9e9f-4a69-84d6-290a58999dfe">an explainer on cosine similarity</a> because I wanted the geometric intuition for why direction-not-distance is the thing being compared, using our own flip-flopping <code>permissions.md</code> vs <code>security.md</code> result as the running example. My brain hurt by the end. Good night.</p>
+<h2>The numbers, all together</h2>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>exact hits</th>
+<th>acceptable hits</th>
+<th>avg time/query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>graph (search↔judge loop)</td>
+<td>51.1%</td>
+<td>62.2%</td>
+<td>21.6s</td>
+</tr>
+<tr>
+<td>single-shot, no glob</td>
+<td>55.6%</td>
+<td>62.2%</td>
+<td>5.7s</td>
+</tr>
+<tr>
+<td>single-shot, +glob</td>
+<td>53.3%</td>
+<td>62.2%</td>
+<td>6.2s</td>
+</tr>
+<tr>
+<td>single-shot, +glob+context</td>
+<td>51.1%</td>
+<td>57.8%</td>
+<td>5.8s</td>
+</tr>
+<tr>
+<td>single-shot, +glob+context+rank</td>
+<td>55.6%</td>
+<td>66.7%</td>
+<td>6.2s</td>
+</tr>
+<tr>
+<td>single-shot, +catalog+calibration</td>
+<td><strong>57.8%</strong></td>
+<td><strong>73.3%</strong></td>
+<td>14.0s</td>
+</tr>
+</tbody>
+</table>
+<p>The repo is at <code>github.com/edwinavalos/rag-research</code>. There's still 2 of the 5 unanswerable queries coming back confidently wrong, so maybe an adventure for another night.</p>
+        </article>
     </main>
 
     <footer>
         <p>&copy; 2026 n0tls. All rights reserved.</p>
     </footer>
 
+    
     <script>
         const toggleButton = document.getElementById('theme-toggle');
         const currentTheme = localStorage.getItem('theme') || 'light';
