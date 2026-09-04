@@ -71,4 +71,4 @@ Ended the night generating myself [an explainer on cosine similarity](https://cl
 | single-shot, +glob+context+rank | 55.6% | 66.7% | 6.2s |
 | single-shot, +catalog+calibration | **57.8%** | **73.3%** | 14.0s |
 
-The repo is at `github.com/edwinavalos/rag-research`. There's still 2 of the 5 unanswerable queries coming back confidently wrong, so maybe an adventure for another night.
+The repo is at [github.com/edwinavalos/rag-research](https://github.com/edwinavalos/rag-research). There's still 2 of the 5 unanswerable queries coming back confidently wrong, so maybe an adventure for another night.
