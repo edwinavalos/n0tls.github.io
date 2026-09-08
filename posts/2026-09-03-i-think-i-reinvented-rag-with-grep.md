@@ -58,7 +58,7 @@ Here are the things that stuck out to me:
 
 Also finally got why "RAG" as a label bugs me: it names a paradigm ("retrieve then generate"), and people use it as if it names a technique. Under that one umbrella you'll find naive top-k cosine similarity, hybrid search with reranking, GraphRAG, RAPTOR (hierarchical LLM-summarized trees, our single flat file being related to this), agentic search, and long-context stuffing. These all get called "RAG" depending on who you talk to despite being different mechanisms with different quality ceilings. When a vendor says "we have RAG," it tells you nothing about how they are doing things, you will need to dig in deeper to see if they are doing something novel.
 
-Ended the night generating myself [an explainer on cosine similarity](https://claude.ai/code/artifact/13f6d86e-9e9f-4a69-84d6-290a58999dfe) because I wanted the geometric intuition for why direction-not-distance is the thing being compared, using our own flip-flopping `permissions.md` vs `security.md` result as the running example. My brain hurt by the end. Good night.
+Ended the night generating myself [an explainer on cosine similarity](https://learning.n0tls.com/cosine-similarity/) because I wanted the geometric intuition for why direction-not-distance is the thing being compared, using our own flip-flopping `permissions.md` vs `security.md` result as the running example. My brain hurt by the end. Good night.
 
 ## The numbers, all together
 
