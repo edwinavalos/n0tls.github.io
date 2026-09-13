@@ -47,6 +47,9 @@
                     <time datetime="{{ post.date }}">{{ post.date_formatted }}</time>
                 </div>
                 <h3 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                {% if post.preview_image %}
+                <a href="{{ post.url }}" class="post-preview-image"><img src="{{ post.preview_image.src }}" alt="{{ post.preview_image.alt }}" loading="lazy"></a>
+                {% endif %}
                 {% if post.excerpt %}
                 <p class="post-excerpt">{{ post.excerpt }}</p>
                 {% endif %}

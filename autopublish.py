@@ -12,6 +12,7 @@ Run as a systemd user service (Linux) or launchd Launch Agent (macOS).
 from __future__ import annotations
 
 import logging
+import re
 import subprocess
 import sys
 import threading
@@ -53,7 +54,11 @@ def publish(path: Path):
     try:
         # --autostash handles any other uncommitted changes in the working tree
         git("pull", "--rebase", "--autostash", "origin", "main")
-        git("add", str(path))
+        # Also stage any local images the post references so they publish together
+        images = [
+            Path(m.lstrip("/")) for m in re.findall(r"\]\((/images/[^)\s]+)", path.read_text())
+        ]
+        git("add", str(path), *[str(i) for i in images if i.exists()])
         diff = git("diff", "--cached", "--name-only")
         if not diff:
             log.info(f"No changes in {path.name}, skipping commit")

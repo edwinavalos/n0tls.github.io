@@ -67,6 +67,16 @@ def parse_post(filepath):
     tags = front_matter.get('tags', [])
     excerpt = front_matter.get('excerpt', '')
 
+    # Posts tagged "image" get a preview of their first image in listings
+    tag_list = tags if isinstance(tags, list) else [tags] if tags else []
+    preview_image = None
+    if 'image' in tag_list:
+        img = re.search(r'<img[^>]*>', html_content)
+        if img:
+            src = re.search(r'src="([^"]+)"', img.group(0))
+            alt = re.search(r'alt="([^"]*)"', img.group(0))
+            preview_image = {'src': src.group(1), 'alt': alt.group(1) if alt else title}
+
     # Parse date
     if isinstance(date_str, str):
         date = datetime.strptime(date_str, '%Y-%m-%d')
@@ -83,8 +93,9 @@ def parse_post(filepath):
         'date_str': date.strftime('%Y-%m-%d'),
         'date_formatted': date.strftime('%B %d, %Y'),
         'created_at': get_first_commit_time(filepath),
-        'tags': tags if isinstance(tags, list) else [tags] if tags else [],
+        'tags': tag_list,
         'excerpt': excerpt,
+        'preview_image': preview_image,
         'content': html_content,
         'url': url,
         'filename': filename,
