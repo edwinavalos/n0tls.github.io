@@ -170,6 +170,19 @@ th {
   margin-top: 0.5rem;
 }
 
+.post-preview-image {
+  display: block;
+  margin-top: 0.75rem;
+}
+
+.post-preview-image img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
 /* Tags */
 .tags {
   display: flex;
