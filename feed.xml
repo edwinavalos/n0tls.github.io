@@ -8,6 +8,13 @@
         <atom:link href="https://n0tls.com/feed.xml" rel="self" type="application/rss+xml"/>
         
     <item>
+        <title>Things I've been working on lately</title>
+        <link>https://n0tls.com/2026-11-24-lately.html</link>
+        <guid>https://n0tls.com/2026-11-24-lately.html</guid>
+        <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+        <description>random things I've tried out</description>
+    </item>
+    <item>
         <title>oops</title>
         <link>https://n0tls.com/2026-09-12-oops.html</link>
         <guid>https://n0tls.com/2026-09-12-oops.html</guid>
@@ -69,13 +76,6 @@
         <guid>https://n0tls.com/2026-04-08-project-glasswing.html</guid>
         <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
         <description>What's the endgame?</description>
-    </item>
-    <item>
-        <title>experiments.n0tls.com</title>
-        <link>https://n0tls.com/2026-04-07-experiments.html</link>
-        <guid>https://n0tls.com/2026-04-07-experiments.html</guid>
-        <pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate>
-        <description>A new home for small tools and projects — starting with voice model evals.</description>
     </item>
     </channel>
 </rss>
