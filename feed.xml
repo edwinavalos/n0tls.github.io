@@ -8,6 +8,13 @@
         <atom:link href="https://n0tls.com/feed.xml" rel="self" type="application/rss+xml"/>
         
     <item>
+        <title>Rapid feedback systems for LLMs</title>
+        <link>https://n0tls.com/2026-11-24-rapid-feedback-llms.html</link>
+        <guid>https://n0tls.com/2026-11-24-rapid-feedback-llms.html</guid>
+        <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+        <description>How do we automatically tell them they are wrong?</description>
+    </item>
+    <item>
         <title>Things I've been working on lately</title>
         <link>https://n0tls.com/2026-11-24-lately.html</link>
         <guid>https://n0tls.com/2026-11-24-lately.html</guid>
@@ -69,13 +76,6 @@
         <guid>https://n0tls.com/2026-04-12-reader-early-signups.html</guid>
         <pubDate>Sun, 12 Apr 2026 00:00:00 +0000</pubDate>
         <description>I built a thing that turns articles into podcast episodes. You can try it now.</description>
-    </item>
-    <item>
-        <title>Project Glasswing</title>
-        <link>https://n0tls.com/2026-04-08-project-glasswing.html</link>
-        <guid>https://n0tls.com/2026-04-08-project-glasswing.html</guid>
-        <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
-        <description>What's the endgame?</description>
     </item>
     </channel>
 </rss>
